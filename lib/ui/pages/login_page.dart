@@ -4,15 +4,26 @@ import 'package:kursach/data/constants/colors.dart';
 import 'package:kursach/logic/controllers.dart';
 import 'package:kursach/logic/functions/login.dart' as login_func;
 import 'package:kursach/ui/pages/profile_page.dart';
+import 'package:kursach/data/local_storage/data_load.dart' as dt;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:kursach/data/temp_storage/user_data.dart' as td;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+
+
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                                 });
                           },
                           child: const Text(
-                            "Forghout your password?",
+                            "Забыли пароль?",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Color(0xffBEB0D7),
