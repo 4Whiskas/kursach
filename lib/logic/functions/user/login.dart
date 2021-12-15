@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:kursach/data/requests/login.dart' as login_request;
+import 'package:kursach/data/requests/user/login.dart' as login_request;
 import 'package:kursach/data/local_storage/data_save.dart' as ds;
 import 'package:kursach/data/temp_storage/user_data.dart' as ud;
 import 'package:kursach/logic/controllers.dart';
