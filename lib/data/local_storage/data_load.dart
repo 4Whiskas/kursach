@@ -10,3 +10,23 @@ Future<bool> loadToken()async
   ud.token = sh.getString('token')!;
   return true;
 }
+
+Future<bool> loadNickName()async
+{
+  var sh = await SharedPreferences.getInstance();
+  if(!sh.containsKey('nickName')) {
+    return false;
+  }
+  ud.nickName = sh.getString('nickName')!;
+  return true;
+}
+
+Future<bool> loadId()async
+{
+  var sh = await SharedPreferences.getInstance();
+  if(!sh.containsKey('userId')) {
+    return false;
+  }
+  ud.userId = sh.getInt('userId')!;
+  return true;
+}

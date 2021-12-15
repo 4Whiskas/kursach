@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/data/constants/colors.dart';
+import 'package:kursach/ui/widgets/flex/trello_card.dart';
 import 'package:kursach/ui/widgets/static/bottom_bar.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key, required this.cards}) : super(key: key);
+
+  final List<TrelloCard> cards;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -28,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  height: 150,
+                    height: 150,
                     width: 150,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(90),
@@ -47,66 +50,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           SizedBox(
                             height: 260,
-                            child: ListView.builder(
-                              itemCount: 10,
+                            child: ListView(
+                              children: widget.cards,
                               scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) => Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15),
-                                child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    shape: NeumorphicShape.convex,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.circular(20)),
-                                    color: const Color(0xffDDD6EA),
-                                    shadowDarkColor: const Color(0xffBDB7C8),
-                                    shadowLightColor: const Color(0xffECE1FF),
-                                    depth: 5,
-                                  ),
-                                  padding: const EdgeInsets.all(30),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20)),
-                                    height: 260,
-                                    width: 260,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text("Label $index"),
-                                            Text(
-                                              "04.01.2022\n10:50",
-                                              textAlign: TextAlign.end,
-                                            )
-                                          ],
-                                        ),
-                                        Text("Text $index"),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.attach_file)),
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.create_outlined)),
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.check)),
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.remove))
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ),
                           ),
                         ],
@@ -114,7 +60,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
-                      child: FloatingActionButton(onPressed: (){},backgroundColor: Color(0xffE2DAF0),child: Icon(Icons.add),),
+                      child: FloatingActionButton(
+                        onPressed: () {},
+                        backgroundColor: Color(0xffE2DAF0),
+                        child: Icon(Icons.add),
+                      ),
                     )
                   ],
                 ),
@@ -123,8 +73,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: const Color(0xffE0D8ED),
                       shadowLightColor: const Color(0xffEFE8FC),
                       shadowDarkColor: const Color(0xffCDC5DC),
-                      boxShape:
-                          NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(15)),
                       depth: 5,
                       shape: NeumorphicShape.convex),
                   child: SizedBox(
@@ -146,8 +96,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: const Color(0xffF1C8C8),
                       shadowLightColor: const Color(0xffFFE0E0),
                       shadowDarkColor: const Color(0xffE8BFBF),
-                      boxShape:
-                          NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(15)),
                       depth: 5,
                       shape: NeumorphicShape.convex),
                   child: SizedBox(
@@ -173,5 +123,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-

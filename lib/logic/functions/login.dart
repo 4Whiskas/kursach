@@ -19,7 +19,10 @@ Future<String> login() async {
     Map<String,dynamic> data = jsonDecode(jsonData);
     ud.token = data['token'];
     ud.nickName = data['nickname'];
-    ds.saveToken(data['token']);
+    ud.token = data['token'];
+    ds.saveToken(ud.token);
+    ds.saveId(ud.userId);
+    ds.saveNickName(ud.nickName);
     return "Authorized";
   } else if (response.statusCode == 400) {
     return "WrongData";

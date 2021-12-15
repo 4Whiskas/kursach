@@ -29,7 +29,14 @@ class _AppState extends State<App> {
     bool? _seen;
 
     _seen = (prefs.containsKey('token') ?? false);
-
+    if(_seen)
+      {
+        _seen = (prefs.containsKey('userId') ?? false);
+        if(_seen)
+          {
+            _seen = (prefs.containsKey('nickName') ?? false);
+          }
+      }
     if (_seen) {
       return "home";
     } else {
