@@ -1,12 +1,22 @@
 import 'package:kursach/data/models/trello_card.dart';
 import 'package:kursach/data/temp_storage/user_data.dart' as user_data;
 
+///int boardId
+///
+///int userId
+///
+///String title
+///
+///bool priv
+///
+///List<TrelloCard> cards
 class Board {
   late int boardId;
   late int userId;
   late String title;
   late bool priv;
   late List<TrelloCard> cards;
+
 
   Board(this.boardId, this.userId, this.title, this.priv, this.cards);
 

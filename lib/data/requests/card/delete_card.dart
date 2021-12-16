@@ -9,7 +9,7 @@ import 'package:kursach/data/headers/login_header.dart';
 ///
 ///Response looks like:
 ///
-Future<http.Response> deleteBoard(String data)async{
+Future<http.Response> deleteCard(String data)async{
   var url = Uri.parse("http://217.25.89.68:25448/Board/deletecard");
   var response = await http.post(url, headers: loginHeaders, body: data);
   return response;

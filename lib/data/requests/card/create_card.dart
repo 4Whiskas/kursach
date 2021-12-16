@@ -7,10 +7,12 @@ import 'package:kursach/data/headers/login_header.dart';
 ///  "title": "string",
 ///  "description": "string",
 ///  "state": "string",
+///  "boardid": int,
+///   "deadline": "2021-12-16T07:04:57.161Z"
 ///}
 ///Response looks like:
 ///
-Future<http.Response> updateBoard(String data)async{
+Future<http.Response> createCard(String data)async{
   var url = Uri.parse("http://217.25.89.68:25448/Board/card");
   var response = await http.post(url, headers: loginHeaders, body: data);
   return response;
