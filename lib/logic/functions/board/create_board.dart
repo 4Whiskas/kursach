@@ -3,7 +3,6 @@ import 'package:kursach/data/models/board.dart' as board_model;
 import 'package:kursach/data/requests/board/create_board.dart' as request;
 import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 import 'package:kursach/data/temp_storage/user_data.dart' as user_data;
-import 'package:kursach/data/temp_storage/company_data.dart' as company_data;
 Future<void> createBoard(String title, bool priv)async
 {
   Map<String, dynamic> data=
@@ -19,7 +18,7 @@ Future<void> createBoard(String title, bool priv)async
       return;
     }
   int boardId = priv?int.parse(response.body):-int.parse(response.body);
-  int ownerId = priv?user_data.userId:company_data.companyId;
+  int ownerId = priv?user_data.userId:app_data.company!.id;
   var board = board_model.Board(boardId,ownerId,title, priv, []);
   app_data.boards.add(board);
 }

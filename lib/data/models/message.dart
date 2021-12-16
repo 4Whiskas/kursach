@@ -4,22 +4,20 @@ class Message {
   late int toId;
   late int fromId;
   late String text;
-  late String reply;
 
-  Message(this.toId, this.text ,{reply=null});
+  Message(this.toId, this.text);
 
   Message.fromJson(Map<String, dynamic> data) {
     toId = data['toid'];
     fromId = data['fromid'];
     text = data['text'];
-    reply = data['reply'];
   }
 
   Map<String, dynamic> toCreateJson() => {
     'token': user_data.token,
     'toid': toId,
     'text': text,
-    'reply': reply,
+    'reply': null,
   };
 
 }
