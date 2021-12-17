@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/logic/functions/user/user_functions.dart' as user_functions;
+import 'package:kursach/logic/functions/user/get_users_boards.dart' as user;
+import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
+import 'package:kursach/ui/pages/profile_page.dart';
 
 class LoginButton extends StatefulWidget {
   const LoginButton({
@@ -27,9 +31,9 @@ class _LoginButtonState extends State<LoginButton> {
           String resp = await user_functions.login();
           switch(resp){
             case 'Authorized':
-
+              user.getUsersBoards();
               Navigator.pushAndRemoveUntil(context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  MaterialPageRoute(builder: (context) => ProfilePage(boards: app_data.boards)),
                       (route) => false);
               break;
             case 'WrongData':

@@ -21,7 +21,7 @@ class Board {
   Board(this.boardId, this.userId, this.title, this.priv, this.cards);
 
   Board.fromJson(Map<String, dynamic> data) {
-    boardId = data['cardid'];
+    boardId = data['id'];
     userId = data['userid']??data['companyid'];
     title = data['title'];
     priv = data['userid']!=null?true:false;

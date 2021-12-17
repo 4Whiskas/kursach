@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:kursach/ui/pages/login_page.dart';
 import 'package:kursach/ui/pages/profile_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:kursach/data/local_storage/data_load.dart' as data_load;
+import 'package:kursach/logic/functions/user/get_users_boards.dart' as user;
+import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 
 void main() {
   runApp(App());
@@ -38,6 +41,10 @@ class _AppState extends State<App> {
           }
       }
     if (_seen) {
+      data_load.loadId();
+      data_load.loadNickName();
+      data_load.loadToken();
+      user.getUsersBoards();
       return "home";
     } else {
       return "login";
@@ -58,7 +65,7 @@ class _AppState extends State<App> {
               initialRoute: snapshot.data.toString(),
               routes: {
                 "login": (context) => const LoginPage(),
-                "home": (context) => const ProfilePage(),
+                "home": (context) => ProfilePage(boards: app_data.boards),
               },
             );
           }

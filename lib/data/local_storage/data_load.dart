@@ -7,7 +7,7 @@ Future<bool> loadToken()async
   if(!sh.containsKey('token')) {
     return false;
   }
-  ud.token = sh.getString('token')!;
+  ud.token = await sh.getString('token')!;
   return true;
 }
 
@@ -17,7 +17,7 @@ Future<bool> loadNickName()async
   if(!sh.containsKey('nickName')) {
     return false;
   }
-  ud.nickName = sh.getString('nickName')!;
+  ud.nickName = await sh.getString('nickName')!;
   return true;
 }
 
@@ -27,6 +27,6 @@ Future<bool> loadId()async
   if(!sh.containsKey('userId')) {
     return false;
   }
-  ud.userId = sh.getInt('userId')!;
+  ud.userId = await sh.getInt('userId')!;
   return true;
 }

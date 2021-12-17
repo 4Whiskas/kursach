@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/data/constants/colors.dart';
+import 'package:kursach/data/models/board.dart';
 import 'package:kursach/ui/widgets/flex/trello_card.dart';
 import 'package:kursach/ui/widgets/static/bottom_bar.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key, required this.cards}) : super(key: key);
+  const ProfilePage({Key? key, required this.boards}) : super(key: key);
 
-  final List<TrelloCard> cards;
+  final List<Board> boards;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -50,8 +51,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           SizedBox(
                             height: 260,
-                            child: ListView(
-                              children: widget.cards,
+                            child: ListView.builder(
+                              itemBuilder: (BuildContext context, int index){
+                                return TrelloCard(cardModel: widget.boards[0].cards[0]);
+                              },
                               scrollDirection: Axis.horizontal,
                             ),
                           ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:kursach/data/models/trello_card.dart' as model;
 
 class TrelloCard extends StatefulWidget {
   const TrelloCard({
-    Key? key, required this.label, required this.text, required this.deadlineTime,
+    Key? key, required this.cardModel,
   }) : super(key: key);
 
-  final String label;
-  final String text;
-  final String deadlineTime;
+  final model.TrelloCard cardModel;
 
   @override
   State<TrelloCard> createState() => _TrelloCardState();
@@ -43,14 +42,14 @@ class _TrelloCardState extends State<TrelloCard> {
                 mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.label),
+                  Text(widget.cardModel.label),
                   Text(
-                    widget.deadlineTime,
+                    widget.cardModel.deadline,
                     textAlign: TextAlign.end,
                   )
                 ],
               ),
-              Text(widget.text),
+              Text(widget.cardModel.description),
               Row(
                 mainAxisAlignment:
                 MainAxisAlignment.spaceEvenly,

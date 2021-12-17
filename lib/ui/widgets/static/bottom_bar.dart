@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kursach/ui/pages/chats_page.dart';
 import 'package:kursach/ui/pages/profile_page.dart';
 import 'package:kursach/ui/pages/tree_page.dart';
+import 'package:kursach/logic/functions/user/get_users_boards.dart' as user;
+import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 
 class BottomBar extends StatefulWidget {
   const BottomBar({
@@ -13,6 +15,7 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -24,8 +27,9 @@ class _BottomBarState extends State<BottomBar> {
       onTap: (index){
         switch(index){
           case 0:
+            user.getUsersBoards();
             Navigator.pushAndRemoveUntil(context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) => ProfilePage(boards: app_data.boards)),
                     (route) => false);
             break;
           case 1:
