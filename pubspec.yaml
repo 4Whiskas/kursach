@@ -33,6 +33,9 @@ dependencies:
   flutter_neumorphic: ^3.0.3
   shared_preferences: any
   http: ^0.13.4
+  date_time_picker: ^2.1.0
+  material_floating_search_bar: ^0.3.6
+  list_picker_dialog_plus: ^0.0.2
 
 dev_dependencies:
   flutter_test:

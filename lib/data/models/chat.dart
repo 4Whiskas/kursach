@@ -14,7 +14,7 @@ class Chat {
       this.users.add(User.fromJson(user));
     }
     chatId = data['chatid'];
-    chatName = data['name']??this.users.first.nickName;
+    chatName = data['name']??this.users.last.nickName;
     priv = data['priv'];
 
   }

@@ -6,16 +6,18 @@ import 'package:kursach/data/temp_storage/user_data.dart' as user_data;
 
 Future<void> createCard(String title, String description, String state,
     int boardId, String deadline, bool priv) async {
+  String dead = deadline.replaceAll(' ', 'T')+':00.000Z';
   Map<String, dynamic> data = {
     'token': user_data.token,
     'title': title,
     'description': description,
     'state': state,
     'boardid': boardId,
-    'deadline': deadline
+    'deadline': dead
   };
   String jsonData = jsonEncode(data);
   var response = await request.createCard(jsonData);
+  print(response.body);
   if (response.statusCode != 200) {
     return;
   }

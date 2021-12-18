@@ -15,6 +15,7 @@ Future<void> getUsersChats()async
     return;
   }
   List<dynamic> data = jsonDecode(response.body);
+  app_data.chats.clear();
   for (Map<String, dynamic> dataMessage in data) {
     Chat chat = Chat.fromJson(dataMessage);
     app_data.chats.add(chat);

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/data/constants/colors.dart';
 import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
+import 'package:kursach/logic/functions/card/delete_card.dart' as delete_card;
+import 'package:kursach/logic/functions/user/get_users_boards.dart' as user_boards;
+import 'package:kursach/ui/pages/profile_page.dart';
 
 class TrelloCard extends StatefulWidget {
   const TrelloCard({
@@ -142,12 +145,21 @@ class _TrelloCardState extends State<TrelloCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.attach_file)),
+                        onPressed: () {},
+                        icon: const Icon(Icons.attach_file)),
+                    IconButton(
+                        onPressed: () {
+
+                        },
+                        icon: const Icon(Icons.create_outlined)),
                     IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.create_outlined)),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.check)),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.remove))
+                        icon: const Icon(Icons.check)),
+                    IconButton(
+                        onPressed: () async{
+                          await delete_card.deleteCard(widget.cardId, widget.boardId, !widget.company, context);
+                        },
+                        icon: const Icon(Icons.remove))
                   ],
                 )
               ],

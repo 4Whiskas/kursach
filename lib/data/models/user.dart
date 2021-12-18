@@ -6,7 +6,7 @@ class User {
 
   User.fromJson(Map<String, dynamic> data) {
     id = data['id'];
-    nickName = data['nickname'];
+    nickName = data['nick'];
   }
 
 }
