@@ -10,11 +10,14 @@ Future<void> getCompanyUsers()async
   };
   String tempJsonData = jsonEncode(tempData);
   var response = await request.getCompanyUsers(tempJsonData);
+  //print(response.body);
   if(response.statusCode!=200)
   {
     return;
   }
   List<dynamic> data = jsonDecode(response.body);
+  //print(data);
+  app_data.users.clear();
   for (Map<String,dynamic> user in data) {
     app_data.users.add(User.fromJson(user));
   }

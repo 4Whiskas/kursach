@@ -63,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 MediaQuery.of(context).size.height < 1000
                                     ? 200
                                     : 260,
-                            width: 350,
+                            width: 300,
                             child: ListView.builder(
                               itemCount: app_data.boards.first.cards.length,
                               itemBuilder:

@@ -121,7 +121,7 @@ class _TreePageState extends State<TreePage> {
                                                 )
                                               : SizedBox(
                                                   height: 260,
-                                                  width: 350,
+                                                  width: 300,
                                                   child: ListView.builder(
                                                       itemCount: app_data
                                                           .company

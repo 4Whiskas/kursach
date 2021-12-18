@@ -2,17 +2,17 @@ import 'package:kursach/data/temp_storage/user_data.dart' as user_data;
 
 class Message {
   late int messageId;
-  late int toId;
   late int fromId;
+  late int chatId;
   late String text;
-  late DateTime utcTime;
+  late String utcTime;
 
-  Message(this.toId, this.text);
+  Message(this.text);
 
   Message.fromJson(Map<String, dynamic> data) {
     messageId = data['id'];
-    toId = data['toid'];
     fromId = data['fromid'];
+    chatId = data['chatid'];
     text = data['text'];
     utcTime = data['utctime'];
   }
@@ -20,8 +20,8 @@ class Message {
   Map<String, dynamic> toCreateJson() => {
     'id':messageId,
     'token': user_data.token,
-    'toid': toId,
     'text': text,
+    'chatid':chatId,
     'reply': null,
     'utctime':utcTime
   };

@@ -17,7 +17,7 @@ Future<String> login() async {
     Map<String,dynamic> data = jsonDecode(jsonData);
     ud.token = data['token'];
     ud.nickName = data['nickname'];
-    ud.token = data['token'];
+    ud.userId = data['id'];
     await ds.saveToken(ud.token);
     await ds.saveId(ud.userId);
     await ds.saveNickName(ud.nickName);

@@ -5,6 +5,7 @@ import 'package:kursach/logic/functions/user/user_functions.dart' as user_functi
 import 'package:kursach/logic/functions/user/get_users_boards.dart' as user;
 import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 import 'package:kursach/ui/pages/profile_page.dart';
+import 'package:kursach/logic/functions/board/create_board.dart' as create_board;
 
 class LoginButton extends StatefulWidget {
   const LoginButton({
@@ -32,6 +33,11 @@ class _LoginButtonState extends State<LoginButton> {
           switch(resp){
             case 'Authorized':
               await user.getUsersBoards();
+              if(app_data.boards.isEmpty)
+                {
+                  await create_board.createBoard('board', true);
+                  await user.getUsersBoards();
+                }
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (context) => ProfilePage()),
                       (route) => false);

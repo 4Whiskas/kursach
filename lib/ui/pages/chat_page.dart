@@ -1,21 +1,61 @@
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/data/constants/colors.dart';
 import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
-import 'package:kursach/data/models/user.dart';
+import 'package:kursach/logic/controllers.dart';
+import 'package:kursach/ui/widgets/widgets.dart' as widgets;
+import 'package:kursach/logic/functions/message/send_message.dart'
+    as send_message;
+import 'package:kursach/logic/functions/message/get_history.dart'
+    as get_history;
+import 'package:list_picker_dialog_plus/list_picker_dialog_plus.dart';
+import 'package:kursach/logic/functions/company/get_company_users.dart'
+    as company_users;
+import 'package:kursach/logic/functions/message/add_user_to_chat.dart'
+    as add_user_to_chat;
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key, required this.chatName, required this.chatUsers})
-      : super(key: key);
+  const ChatPage({
+    Key? key,
+    required this.chatId,
+  }) : super(key: key);
 
   @override
   State<ChatPage> createState() => _ChatPageState();
 
-  final String chatName;
-  final List<User> chatUsers;
+  final int chatId;
 }
 
 class _ChatPageState extends State<ChatPage> {
+  Timer? timer;
+
+  @override
+  void initState() {
+    SchedulerBinding.instance!.addPostFrameCallback((_) =>
+        chatScrollingController
+            .jumpTo(chatScrollingController.position.maxScrollExtent));
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        chatScrollingController
+            .jumpTo(chatScrollingController.position.maxScrollExtent);
+      });
+    });
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+      await get_history.getHistory(widget.chatId);
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,17 +70,84 @@ class _ChatPageState extends State<ChatPage> {
         shadowColor: Colors.transparent,
         centerTitle: true,
         actions: [
-          IconButton(
-              onPressed: () => {},
-              icon: const Icon(Icons.more_vert, color: Color(0xff776A94)))
+          PopupMenuButton(
+            color: const Color(0xffD0C9DC),
+            itemBuilder: (context) => [
+              app_data.chats
+                      .firstWhere((element) => element.chatId == widget.chatId)
+                      .priv
+                  ? const PopupMenuItem(
+                      child: Text('Удалить'),
+                      value: 'Удалить',
+                    )
+                  : const PopupMenuItem(
+                      child: Text('Пригласить пользователя'),
+                      value: 'Пригласить пользователя',
+                    )
+            ],
+            onSelected: (String value) async {
+              if (value != 'Пригласить пользователя') {
+                return;
+              }
+              await company_users.getCompanyUsers();
+              List<String> textUsers = [];
+              for (var user in app_data.users) {
+                textUsers.add(user.nickName);
+              }
+              var item = await showTextListPicker(
+                  context: context, findFn: (str) async => textUsers);
+              chatNameController.text = item!;
+              if (chatNameController.text.isEmpty) {
+                return;
+              }
+              await add_user_to_chat.addUserToChat(
+                  widget.chatId,
+                  app_data.users
+                      .firstWhere((element) => element.nickName == item)
+                      .id);
+              setState(() {});
+            },
+            icon: const Icon(Icons.more_vert, color: Color(0xff776A94)),
+          ),
         ],
-        title: Text(widget.chatName,
-            style: const TextStyle(
-                color: Color(0xff776A94), fontFamily: "Sansita")),
+        title: GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return SingleChildScrollView(
+                    child: SizedBox(
+                      height: 350,
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return Text(app_data.chats
+                              .firstWhere(
+                                  (element) => element.chatId == widget.chatId)
+                              .users[index]
+                              .nickName);
+                        },
+                        itemCount: app_data.chats
+                            .firstWhere(
+                                (element) => element.chatId == widget.chatId)
+                            .users
+                            .length,
+                      ),
+                    ),
+                  );
+                });
+          },
+          child: Text(
+              app_data.chats
+                  .firstWhere((element) => element.chatId == widget.chatId)
+                  .chatName,
+              style: const TextStyle(
+                  color: Color(0xff776A94), fontFamily: "Sansita")),
+        ),
       ),
-      body: SafeArea(
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: Container(
-          height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.only(top: 20),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -52,27 +159,21 @@ class _ChatPageState extends State<ChatPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("name"), Text("time")],
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xffCDC6DC),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: const Text("text"),
-                        ),
-                      ],
-                    )
-                  ],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height - 160,
+                    child: ListView.builder(
+                        controller: chatScrollingController,
+                        scrollDirection: Axis.vertical,
+                        itemCount: app_data.messages.length,
+                        itemBuilder: (context, index) {
+                          return widgets.Message(
+                            localMessageId: index,
+                          );
+                        }),
+                  ),
                 ),
               ),
               Container(
@@ -86,7 +187,7 @@ class _ChatPageState extends State<ChatPage> {
                         onPressed: () {}, icon: const Icon(Icons.attach_file)),
                     SizedBox(
                       height: 50,
-                      width: 200,
+                      width: 250,
                       child: Neumorphic(
                         style: NeumorphicStyle(
                           shape: NeumorphicShape.flat,
@@ -97,15 +198,28 @@ class _ChatPageState extends State<ChatPage> {
                           shadowLightColor: const Color(0xffB8B4C2),
                           depth: -5,
                         ),
-                        child: const TextField(
-                          style: TextStyle(
+                        child: TextField(
+                          controller: messageController,
+                          style: const TextStyle(
                             decoration: TextDecoration.none,
                           ),
-                          decoration: InputDecoration(border: InputBorder.none),
+                          decoration:
+                              const InputDecoration(border: InputBorder.none),
                         ),
                       ),
                     ),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.send))
+                    IconButton(
+                        onPressed: () async {
+                          await send_message.sendMessage(
+                              widget.chatId, messageController.text);
+                          setState(() {
+                            messageController.clear();
+                            chatScrollingController.jumpTo(
+                                chatScrollingController
+                                    .position.maxScrollExtent);
+                          });
+                        },
+                        icon: const Icon(Icons.send))
                   ],
                 ),
               ),

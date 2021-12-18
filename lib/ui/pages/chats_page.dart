@@ -51,15 +51,14 @@ class _ChatsPageState extends State<ChatsPage> {
                               vertical: 10, horizontal: 30),
                           child: GestureDetector(
                             onTap: () async {
-                              await message_history
-                                  .getHistory(app_data.chats[index].chatId);
+                              await message_history.getHistory(app_data.chats[index].chatId);
+                              await company_users.getCompanyUsers();
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ChatPage(
-                                            chatUsers:
-                                                app_data.chats[index].users,
-                                            chatName: 'test',
+                                            chatId:
+                                                app_data.chats[index].chatId,
                                           )));
                             },
                             child: Neumorphic(

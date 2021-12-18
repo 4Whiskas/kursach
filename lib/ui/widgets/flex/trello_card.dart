@@ -3,8 +3,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/data/constants/colors.dart';
 import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 import 'package:kursach/logic/functions/card/delete_card.dart' as delete_card;
-import 'package:kursach/logic/functions/user/get_users_boards.dart' as user_boards;
-import 'package:kursach/ui/pages/profile_page.dart';
 
 class TrelloCard extends StatefulWidget {
   const TrelloCard({
@@ -84,7 +82,7 @@ class _TrelloCardState extends State<TrelloCard> {
           child: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             height: 100,
-            width: 260,
+            width: 200,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -7,7 +7,7 @@ Future<void> getHistory(int chatId, {int skip=0, int take=0})async
 {
   Map<String, dynamic> sendData = {
     'token':user_data.token,
-    'id':chatId,
+    'chatid':chatId,
     'skip':skip==0?null:skip,
     'take':take==0?null:take
   };
@@ -18,6 +18,7 @@ Future<void> getHistory(int chatId, {int skip=0, int take=0})async
     return;
   }
   List<dynamic> data = jsonDecode(response.body);
+  app_data.messages.clear();
   for (Map<String, dynamic> dataMessage in data) {
     Message message = Message.fromJson(dataMessage);
     app_data.messages.add(message);
