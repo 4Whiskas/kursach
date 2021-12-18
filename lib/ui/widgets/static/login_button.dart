@@ -31,9 +31,9 @@ class _LoginButtonState extends State<LoginButton> {
           String resp = await user_functions.login();
           switch(resp){
             case 'Authorized':
-              user.getUsersBoards();
+              await user.getUsersBoards();
               Navigator.pushAndRemoveUntil(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage(boards: app_data.boards)),
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
                       (route) => false);
               break;
             case 'WrongData':

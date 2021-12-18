@@ -18,7 +18,7 @@ Future<void> createBoard(String title, bool priv)async
       return;
     }
   int boardId = priv?int.parse(response.body):-int.parse(response.body);
-  int ownerId = priv?user_data.userId:app_data.company!.id;
+  int ownerId = priv?user_data.userId:app_data.company.id;
   var board = board_model.Board(boardId,ownerId,title, priv, []);
-  app_data.boards.add(board);
+  priv?app_data.company.boards.add(board):app_data.boards.add(board);
 }

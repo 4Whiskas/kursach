@@ -8,4 +8,4 @@ List<Board> boards=[];
 List<Chat> chats=[];
 List<Message> messages = [];
 List<User> users=[];
-Company? company;
+Company company = Company(0, "name", []);

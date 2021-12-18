@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kursach/ui/pages/chats_page.dart';
 import 'package:kursach/ui/pages/profile_page.dart';
 import 'package:kursach/ui/pages/tree_page.dart';
-import 'package:kursach/logic/functions/user/get_users_boards.dart' as user;
-import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
+import 'package:kursach/logic/functions/user/get_users_boards.dart' as user_boards;
+import 'package:kursach/logic/functions/user/get_users_chats.dart' as user_chats;
+import 'package:kursach/logic/functions/company/get_company.dart' as get_company;
 
 class BottomBar extends StatefulWidget {
   const BottomBar({
@@ -23,24 +24,27 @@ class _BottomBarState extends State<BottomBar> {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       selectedItemColor: const Color(0xff9893A1),
+
       unselectedItemColor: const Color(0xff9893A1),
-      onTap: (index){
+      onTap: (index)async{
         switch(index){
           case 0:
-            user.getUsersBoards();
+            await user_boards.getUsersBoards();
             Navigator.pushAndRemoveUntil(context,
-                MaterialPageRoute(builder: (context) => ProfilePage(boards: app_data.boards)),
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
                     (route) => false);
             break;
           case 1:
+            await user_chats.getUsersChats();
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) => const ChatsPage()),
                     (route) => false);
             break;
           case 2:
-            Navigator.pushAndRemoveUntil(context,
+            get_company.getCompany().then((value) => Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) => const TreePage()),
-                    (route) => false);
+                    (route) => false));
+
             break;
         }
       },

@@ -2,7 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/data/constants/colors.dart';
+import 'package:kursach/logic/controllers.dart';
+import 'package:kursach/ui/widgets/flex/trello_card.dart';
 import 'package:kursach/ui/widgets/static/bottom_bar.dart';
+import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
+import 'package:kursach/logic/functions/card/create_card.dart' as create_card;
+import 'package:kursach/logic/functions/board/create_board.dart'
+    as create_board;
+import 'package:kursach/ui/widgets/widgets.dart';
 
 class TreePage extends StatefulWidget {
   const TreePage({Key? key}) : super(key: key);
@@ -16,93 +23,205 @@ class _TreePageState extends State<TreePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-            height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Container(
             padding: const EdgeInsets.only(top: 20),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [lightPageUpGradient, lightPageDownGradient],
               ),
             ),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 260,
-                    child: ListView.builder(
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Neumorphic(
-                          style: NeumorphicStyle(
-                            shape: NeumorphicShape.convex,
-                            boxShape: NeumorphicBoxShape.roundRect(
-                                BorderRadius.circular(20)),
-                            color: const Color(0xffDDD6EA),
-                            shadowDarkColor: const Color(0xffBDB7C8),
-                            shadowLightColor: const Color(0xffECE1FF),
-                            depth: 5,
-                          ),
-                          padding: const EdgeInsets.all(30),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)),
-                            height: 260,
-                            width: 260,
-                            child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Label $index"),
-                                    Text(
-                                      "04.01.2022\n10:50",
-                                      textAlign: TextAlign.end,
-                                    )
-                                  ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: FloatingActionButton(
+                      heroTag: "add_board",
+                      onPressed: () async {
+                        boardNameController.clear();
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                titlePadding: EdgeInsets.zero,
+                                title: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        lightPageUpGradient,
+                                        lightPageDownGradient
+                                      ],
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                          height: 50,
+                                          width: 200,
+                                          child: InputField(
+                                              contoller: boardNameController,
+                                              hint: "Название доски",
+                                              obscured: false)),
+                                      IconButton(
+                                          onPressed: () async{
+                                            await create_board.createBoard(boardNameController.text, false);
+                                          },
+                                          icon: const Icon(Icons.check))
+                                    ],
+                                  ),
                                 ),
-                                Text("Text $index"),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.attach_file)),
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.create_outlined)),
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.check)),
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.remove))
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                              );
+                            });
+                        setState(() {});
+                      },
+                      backgroundColor: const Color(0xffE2DAF0),
+                      child: const Icon(Icons.add),
                     ),
                   ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  app_data.company.boards.isEmpty
+                      ? const SizedBox(
+                          height: 1,
+                        )
+                      : SizedBox(
+                          height: MediaQuery.of(context).size.height - 187,
+                          child: ListView.builder(
+                              itemCount: app_data.company.boards.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, boardIndex) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      app_data.company.boards[boardIndex].cards
+                                              .isEmpty
+                                          ? const SizedBox(
+                                              height: 1,
+                                            )
+                                          : SizedBox(
+                                              height: 260,
+                                              width: 350,
+                                              child: ListView.builder(
+                                                  itemCount: app_data
+                                                      .company
+                                                      .boards[boardIndex]
+                                                      .cards
+                                                      .length,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return app_data
+                                                            .company
+                                                            .boards[boardIndex]
+                                                            .cards
+                                                            .isEmpty
+                                                        ? const SizedBox(
+                                                            height: 1,
+                                                          )
+                                                        : TrelloCard(
+                                                            boardId: app_data
+                                                                .company
+                                                                .boards[
+                                                                    boardIndex]
+                                                                .boardId,
+                                                            cardId: app_data
+                                                                .company
+                                                                .boards[
+                                                                    boardIndex]
+                                                                .cards[index]
+                                                                .cardId,
+                                                            company: true,
+                                                          );
+                                                  }),
+                                            ),
+                                      FloatingActionButton(
+                                        heroTag: app_data
+                                            .company.boards[boardIndex].boardId,
+                                        onPressed: () async {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(15)),
+                                                  titlePadding: EdgeInsets.zero,
+                                                  title: Container(
+                                                    padding: const EdgeInsets.all(20),
+                                                    decoration: const BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          lightPageUpGradient,
+                                                          lightPageDownGradient
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        SizedBox(
+                                                            height: 50,
+                                                            width: 200,
+                                                            child: InputField(
+                                                                contoller: boardNameController,
+                                                                hint: "Заголовок",
+                                                                obscured: false)),
+                                                        SizedBox(
+                                                            height: 300,
+                                                            width: 200,
+                                                            child: SingleChildScrollView(
+                                                              child: InputField(
+                                                                  contoller: boardNameController,
+                                                                  hint: "Описание",
+                                                                  obscured: false),
+                                                            )),
+                                                        DateTimePic
+                                                        IconButton(
+                                                            onPressed: () async{
+                                                              await create_board.createBoard(boardNameController.text, false);
+                                                            },
+                                                            icon: const Icon(Icons.check))
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              });
+                                          // await create_card.createCard(
+                                          //     "test",
+                                          //     "test",
+                                          //     "todo",
+                                          //     app_data.company
+                                          //         .boards[boardIndex].boardId,
+                                          //     "2021-12-17T22:06:59.186Z",
+                                          //     false);
+                                          setState(() {});
+                                        },
+                                        backgroundColor:
+                                            const Color(0xffE2DAF0),
+                                        child: const Icon(Icons.add),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
+                        ),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20, top: 200),
-              child: FloatingActionButton(onPressed: (){},backgroundColor: const Color(0xffE2DAF0),child: const Icon(Icons.add),),
-            )
-          ],
-        ),
+          ),
         ),
       ),
       bottomNavigationBar: const BottomBar(),

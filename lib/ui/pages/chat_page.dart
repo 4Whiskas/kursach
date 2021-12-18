@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:kursach/data/constants/colors.dart';
-import 'package:kursach/data/models/message.dart';
+import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 import 'package:kursach/data/models/user.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage(
-      {Key? key,
-      required this.chatName,
-      required this.chatHistory,
-      required this.chatUsers})
+  const ChatPage({Key? key, required this.chatName, required this.chatUsers})
       : super(key: key);
 
   @override
@@ -17,7 +13,6 @@ class ChatPage extends StatefulWidget {
 
   final String chatName;
   final List<User> chatUsers;
-  final List<Message> chatHistory;
 }
 
 class _ChatPageState extends State<ChatPage> {
@@ -88,8 +83,7 @@ class _ChatPageState extends State<ChatPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.attach_file)),
+                        onPressed: () {}, icon: const Icon(Icons.attach_file)),
                     SizedBox(
                       height: 50,
                       width: 200,
@@ -107,8 +101,7 @@ class _ChatPageState extends State<ChatPage> {
                           style: TextStyle(
                             decoration: TextDecoration.none,
                           ),
-                          decoration:
-                          InputDecoration(border: InputBorder.none),
+                          decoration: InputDecoration(border: InputBorder.none),
                         ),
                       ),
                     ),

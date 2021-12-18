@@ -31,20 +31,20 @@ class _AppState extends State<App> {
 
     bool? _seen;
 
-    _seen = (prefs.containsKey('token') ?? false);
+    _seen = (prefs.containsKey('token'));
     if(_seen)
       {
-        _seen = (prefs.containsKey('userId') ?? false);
+        _seen = (prefs.containsKey('userId'));
         if(_seen)
           {
-            _seen = (prefs.containsKey('nickName') ?? false);
+            _seen = (prefs.containsKey('nickName'));
           }
       }
     if (_seen) {
-      data_load.loadId();
-      data_load.loadNickName();
-      data_load.loadToken();
-      user.getUsersBoards();
+      await data_load.loadId();
+      await data_load.loadNickName();
+      await data_load.loadToken();
+      await user.getUsersBoards();
       return "home";
     } else {
       return "login";
@@ -65,7 +65,7 @@ class _AppState extends State<App> {
               initialRoute: snapshot.data.toString(),
               routes: {
                 "login": (context) => const LoginPage(),
-                "home": (context) => ProfilePage(boards: app_data.boards),
+                "home": (context) => ProfilePage(),
               },
             );
           }

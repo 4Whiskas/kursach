@@ -21,35 +21,13 @@ class TrelloCard {
   TrelloCard(this.cardId, this.boardId ,this.label, this.description, this.state, this.deadline);
 
   TrelloCard.fromJson(Map<String, dynamic> data) {
-    cardId = data['cardid'];
+    cardId = data['id'];
     boardId = data['boardid'];
-    label = data['label'];
+    label = data['title'];
     description = data['description'];
     state = data['state'];
     deadline = data['deadline'];
   }
 
-  Map<String, dynamic> toCreateJson() => {
-    'token': user_data.token,
-    'cardid': cardId,
-    'label': label,
-    'description': description,
-    'state': state,
-    'deadline': deadline,
-  };
-
-  Map<String, dynamic> toUpdateJson() => {
-    'token': user_data.token,
-    'cardid': cardId,
-    'label': label,
-    'description': description,
-    'state': state,
-    'deadline': deadline,
-  };
-
-  Map<String, dynamic> toDeleteJson() => {
-    'token': user_data.token,
-    'cardid': cardId,
-  };
 
 }
