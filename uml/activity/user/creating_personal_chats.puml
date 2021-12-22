@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+start
+    :Нажатие кнопки\n'создания персонального чата'<
+    :Создание нового персонального чата|
+        repeat
+            :Ввод названия чата<
+            if(Название уникально?)is (да) then
+                :Добавление нового чата/
+                stop
+            else(нет)
+            :Сообщение об ошибке>
+            endif
+            repeatwhile
+@enduml

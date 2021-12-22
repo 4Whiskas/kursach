@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+
+:Рядовой сотрудник: as User
+
+(Создание\n личных карточек) as UserTask1
+(Менеджмент\n личных карточек) as UserTask2
+(Создание\nличных чатов) as UserTask3
+(Отправка\nсообщений) as UserTask4
+
+User --> UserTask1
+User --> UserTask2
+User --> UserTask3
+User --> UserTask4
+
+
+@enduml

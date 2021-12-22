@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+:Компания: as Company
+(Подача заявлений на\nрегистрацию компании) as CompanyTask
+
+Company -->CompanyTask
+
+@enduml

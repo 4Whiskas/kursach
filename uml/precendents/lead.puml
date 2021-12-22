@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+:Руководитель отдела: as Lead
+
+(Создание заявлений на\nрегистрацию пользователей) as LeadTask1
+(Создание досок отдела) as LeadTask2
+(Создание\nкарточек отдела) as LeadTask3
+(Менеджмент\nкарточек отдела) as LeadTask4
+(Создание\nчатов отдела) as LeadTask5
+(Менеджмент\nчатов отдела) as LeadTask6
+
+Lead --> LeadTask1
+Lead --> LeadTask2
+Lead --> LeadTask3
+Lead --> LeadTask4
+Lead --> LeadTask5
+Lead --> LeadTask6
+
+
+@enduml

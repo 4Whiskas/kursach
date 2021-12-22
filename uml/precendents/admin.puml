@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+:Администратор: as Admin
+(Регистрация компаний) as AdminTask1
+(Регистрация пользователей) as AdminTask2
+Admin --> AdminTask1
+Admin --> AdminTask2
+@enduml
