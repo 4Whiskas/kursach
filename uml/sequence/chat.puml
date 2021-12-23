@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+Client -> Server: Creating Chat Request
+Server --> Client: Creating Chat Response
+
+Client -> Server: Adding User To Chat Request
+Server --> Client: Adding User To Chat Response
+
+Client -> Server: Send Message Request
+Server --> Client: Send Message Response
+@enduml

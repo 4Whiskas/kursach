@@ -1,0 +1,7 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Client -> Server: Authentication request
+Server --> Client: Authentication response
+
+@enduml

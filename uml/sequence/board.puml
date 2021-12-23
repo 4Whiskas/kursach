@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Client -> Server: Create Board Request
+Server --> Client: Create Board Response
+
+Client -> Server: Update Board Request
+Server --> Client: Update Board Response
+
+Client -> Server: Create Card Request
+Server --> Client: Create Card Response
+
+Client -> Server: Update Card Request
+Server --> Client: Update Card Response
+
+Client -> Server: Finish Card Request
+Server --> Client: Finish Card Response
+
+Client -> Server: Delete Card Request
+Server --> Client: Delete Card Response
+
+@enduml

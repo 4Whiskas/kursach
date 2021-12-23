@@ -12,7 +12,8 @@ class UserLogic
 class UserRequests
 
 ProfilePage o-- Constants
-ProfilePage o-- CardLogic
+ProfilePage --> CardLogic
+ProfilePage --> UserLogic
 CardLogic o-- CardRequests
 CardLogic o-- AppData
 CardLogic o-- Controllers
