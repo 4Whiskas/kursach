@@ -7,8 +7,6 @@ class Message {
   late String text;
   late String utcTime;
 
-  Message(this.text);
-
   Message.fromJson(Map<String, dynamic> data) {
     messageId = data['id'];
     fromId = data['fromid'];

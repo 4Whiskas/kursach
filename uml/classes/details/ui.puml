@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class LoginPage
+{
+    +login();
+}
+class ProfilePage
+{
+    +create_card();
+    +finish_card();
+    +update_card();
+    +delete_card();
+    +logout();
+}
+class ChatsPage
+{
+    +open_chat(int chatId);
+    +create_chat();
+}
+interface ChatPage
+{
+    int chatId;
+    +send_message();
+    +attach();
+}
+class CompanyChat extends ChatPage
+{
+    +get_user_list();
+    +add_user();
+}
+class PrivateChat extends ChatPage
+{
+
+}
+class TreePage
+{
+    +crete_board();
+    +create_card();
+}
+
+ChatPage --o ChatsPage
+
+@enduml

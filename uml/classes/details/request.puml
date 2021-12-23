@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class BoardRequests
+{
+    +create_board(String data);
+    +get_board(String data);
+    +update_board(String data);
+}
+class CardRequests
+{
+    +create_card(String data);
+    +delete_card(String data);
+    +update_card(String data);
+}
+class CompanyRequests
+{
+   +get_company(String data);
+   +get_company_users(String data);
+}
+class MessageRequests
+{
+    +add_user_to_chat(String data);
+    +create_company_chat(String data);
+    +create_private_chat(String data);
+    +get_history(String data);
+    +send_message(String data);
+}
+class UserRequests
+{
+    +get_users_boards(String data);
+    +get_users_chats(String data);
+    +login(String data);
+}
+
+@enduml

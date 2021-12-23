@@ -1,0 +1,114 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Constants
+{
+    Colors colors;
+    Map<String, Headers> headers;
+}
+
+class Headers
+{
+    Map<String, String> defaultHeader;
+}
+
+class LocalStorage
+{
+    +loadTocken();
+    +loadNickName();
+    +loadId();
+    +saveToken();
+    +saveNickName();
+    +saveId();
+}
+
+interface BoardModel
+{
+    int boardId;
+    int userId;
+    String title;
+    bool priv;
+    List<TrelloCardModel> cards;
+    -BoardModel(int boardId, int UserId, String title,\nbool priv, List<TrelloCard> cards);
+    -BoardModel.fromJson(Map<String, dynamic> data);
+    +toCreateJson();
+}
+class CompanyBoard extends BoardModel
+{
+    User owner;
+    List<User> workers;
+}
+class PrivateBoard extends BoardModel
+{
+
+}
+class ChatModel
+{
+  int chatId;
+  String chatName;
+  List<User> users=[];
+  bool priv;
+  -ChatModel(int chatId, String chatName,\nList<Users> users, bool priv);
+  -ChatModel.fromJson(Map<String, dynamic> data);
+}
+class CompanyModel
+{
+    int id;
+    String name;
+    List<BoardModel> boards=[];
+    -CompanyModel(int id, String name, List<BoardModel>);
+    -CompanyModel.fromJson(Map<String, dynamic> data);
+}
+class MessageModel
+{
+    int messageId;
+    int fromId;
+    int chatId;
+    String text;
+    String utcTime;
+    -Message.fromJson(Map<String, dynamic> data);
+    +toCreateJson();
+}
+class TrelloCardModel
+{
+    int cardId;
+    int boardId;
+    String label;
+    String description;
+    String state;
+    String deadline;
+    -TrelloCard(int cardId, int boardId, String label,\nString description, String state, String deadline);
+    -TrelloCard.fromJson(Map<String, dynamic> data)
+}
+class UserModel
+{
+    int id;
+    String nickName;
+    -UserModel(int id, String nickName);
+    -UserModel.fromJson(Map<String, dynamic> data);
+}
+class AppData
+{
+    List<BoardModel> boards;
+    List<ChatModel> chats;
+    Lit<UserModel> users;
+    List<MessageModel> messages;
+    CompanyModel company;
+}
+class UserData
+{
+    int userId;
+    String token;
+    String nickName;
+}
+AppData o-- PrivateBoard
+BoardModel o-- TrelloCardModel
+AppData o-- MessageModel
+AppData o-- ChatModel
+AppData o-- UserModel
+AppData o-- CompanyModel
+CompanyModel o-- CompanyBoard
+CompanyBoard o-- UserModel
+ChatModel o-- UserModel
+Constants o-- Headers
+@enduml

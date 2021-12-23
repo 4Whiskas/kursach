@@ -9,14 +9,14 @@ Project starts 2021-10-01
 [Разработка архитектуры\nклиент-сервера] as [CS] lasts 5 days and is colored in Lavender/LightBlue
 [Выбор стека технологий] as [CST] lasts 2 days and is colored in LightGreen/LightBlue
 
-[Разработка UI] as [UI] lasts 10 days and is colored in Yellow/Brown
+[Разработка UI] as [UI] lasts 10 days and is colored in White/Black
 [Выбор направления дизайна] as [DES] lasts 1 days and is colored in Lavender/LightBlue
 [Разработка UI в FIGMA] as [FIGMA] lasts 2 days and is colored in Lavender/LightBlue
 [Написание UI\nпри помощи ЯП (верстка)] as [VERST] lasts 7 days and is colored in Lavender/LightBlue
 [Тестирование UI] as [UIT] starts at 2021-10-21  and lasts 3 days and is colored in LightGrey/Black
 [Доработка UI] as [UIR] lasts 3 days and is colored in Grey/Black
 
-[Разработка модуля\nвзаимодействия с API] as [MAPI] lasts 15 days and is colored in Purple/black and starts at 2021-10-27
+[Разработка модуля\nвзаимодействия с API] as [MAPI] lasts 15 days and is colored in White/Black and starts at 2021-10-27
 [Разработка запросов API] as [REQ] lasts 5 days and is colored in Lavender/LightBlue
 [Разработка моделей данных] as [MODEL] lasts 7 days and is colored in Lavender/LightBlue
 [Разработка модуля локального хранилища] as [STOR] lasts 3 days and is colored in Lavender/LightBlue
@@ -24,14 +24,15 @@ Project starts 2021-10-01
 [Тестрирование модуля API] as [TAPI] lasts 5 days and is colored in LightGrey/Black
 [Доработка модуля API] as [DAPI] lasts 5 days and is colored in Grey/Black
 
-[Разработка модуля коннектора UI с\nмодулем взаимодействия с API] as [LOGIC] lasts 15 days and is colored in Acc/black and starts at 2021-11-16
+[Разработка модуля коннектора UI с\nмодулем взаимодействия с API] as [LOGIC] lasts 15 days and is colored in White/Black and starts at 2021-11-16
+
 [Тестрирование коннектора] as [TLOGIC] lasts 5 days and is colored in LightGrey/Black
 [Доработка коннектора] as [DLOGIC] lasts 5 days and is colored in Grey/Black
 
 [Тестрирование прототипа] as [TPROT] lasts 5 days and is colored in LightGrey/Black
 [Доработка прототипа] as [DPROT] lasts 5 days and is colored in Grey/Black
 
-[Написание отчета по проекту] as [OTCH] lasts 10 days and is colored in Pink and starts at 2021-12-11
+[Написание отчета по проекту] as [OTCH] lasts 10 days and is colored in White/Black and starts at 2021-12-11
 
 
 

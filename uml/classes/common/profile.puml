@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ProfilePage
+class Constants
+class BoardLogic
+class BoardRequests
+class AppData
+class UserData
+
+ProfilePage o-- Constants
+ProfilePage o-- AppData
+ProfilePage o-- BoardLogic
+BoardLogic ..> BoardRequests
+ProfilePage o-- UserData
+
+
+
+@enduml

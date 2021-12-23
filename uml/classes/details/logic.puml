@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class BoardLogic
+{
+    +create_board(String title, bool private)
+    +update_board(int boardId, String title, bool private)
+}
+class CardLogic
+{
+    +create_card(String title, String description,
+    String state,int boardId, String deadline, bool priv)
+    +delete_card(int cardId, int boardId, bool priv, BuildContext context)
+    +update_card(String title, String description, String state, int boardId,int cardId, String deadline)
+}
+class CompanyLogic
+{
+    +get_company()
+    +get_company_users()
+}
+class MessageLogic
+{
+    +add_user_to_chat(String name)
+    +create_company_chat(int friendId)
+    +get_history(int chatId, {int skip=0, int take=0})
+    +send_message(int chatId, String text)
+}
+class UserLogic
+{
+    +get_user_boards()
+    +get_user_chats()
+    +login(String login, String password)
+}
+class Controllers
+{
+    TextEditingController loginController;
+    TextEditingController passwordController;
+    TextEditingController boardNameController;
+    TextEditingController cardNameController;
+    TextEditingController cardDescriptionController;
+    TextEditingController cardDeadlineController;
+    TextEditingController chatNameController;
+    TextEditingController messageController;
+    ScrollController chatScrollingController;
+}
+
+
+
+@enduml
