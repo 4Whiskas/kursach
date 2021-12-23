@@ -1,27 +1,30 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+class TreePage
+class CompanyLogic
+class AppData
+class BoardLogic
+class Controllers
+class BoardRequests
+class CardRequests
+class CardLogic
+class CompanyRequests
+class Constants
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
-}
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
+TreePage ..> CompanyLogic
+TreePage o-- Constants
+CompanyLogic o-- CompanyRequests
+CompanyLogic ..> BoardLogic
+BoardLogic o-- CardLogic
+BoardLogic o-- BoardRequests
+BoardLogic o-- Controllers
+CardLogic o-- CardRequests
+CardLogic o-- Controllers
+CompanyLogic o-- AppData
+BoardLogic o-- AppData
+CompanyRequests o-- Constants
+CardRequests o-- Constants
+BoardRequests o-- Constants
 
 @enduml

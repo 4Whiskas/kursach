@@ -2,19 +2,17 @@
 'https://plantuml.com/class-diagram
 
 class LoginPage
-class ProfilePage
 class UserLogic
 class UserData
 class AppData
 class Constants
 class UserRequests
 class LocalStorage
-LoginPage o-- Constants
+LoginPage o- Constants
 LoginPage ..> UserLogic
 UserLogic o-- UserData
-UserData ..> LocalStorage
-UserLogic <..> UserRequests
-UserLogic ..> ProfilePage
-UserRequests ..> UserData
-UserRequests ..> AppData
+UserData o-- LocalStorage
+UserLogic o-- UserRequests
+UserLogic o-- AppData
+UserRequests o-- Constants
 @enduml

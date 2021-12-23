@@ -3,17 +3,24 @@
 
 class ProfilePage
 class Constants
-class BoardLogic
-class BoardRequests
+class CardRequests
 class AppData
 class UserData
+class CardLogic
+class Controllers
+class UserLogic
+class UserRequests
 
 ProfilePage o-- Constants
-ProfilePage o-- AppData
-ProfilePage o-- BoardLogic
-BoardLogic ..> BoardRequests
+ProfilePage o-- CardLogic
+CardLogic o-- CardRequests
+CardLogic o-- AppData
+CardLogic o-- Controllers
+CardLogic o-- UserLogic
+UserLogic o-- UserRequests
+UserLogic o-- AppData
 ProfilePage o-- UserData
-
-
+CardRequests o-- Constants
+UserRequests o-- Constants
 
 @enduml

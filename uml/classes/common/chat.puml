@@ -1,27 +1,21 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+class ChatPage
+class MessageLogic
+class MessageRequests
+class AppData
+class UserData
+class Controllers
+class Constants
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
-}
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
+ChatPage ..> MessageLogic
+ChatPage o- Constants
+ChatPage o--- AppData
+MessageRequests o-- Constants
+MessageLogic o-- MessageRequests
+MessageLogic o-- AppData
+MessageLogic o-- UserData
+MessageLogic o-- Controllers
 
 @enduml
