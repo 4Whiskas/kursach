@@ -10,6 +10,7 @@ import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 import 'package:kursach/logic/functions/board/create_board.dart'
     as create_board;
 import 'package:kursach/ui/widgets/widgets.dart';
+import 'package:kursach/logic/functions/user/get_users_boards.dart' as user_boards;
 
 class TreePage extends StatefulWidget {
   const TreePage({Key? key}) : super(key: key);
@@ -74,6 +75,11 @@ class _TreePageState extends State<TreePage> {
                                             await create_board.createBoard(
                                                 boardNameController.text,
                                                 false);
+                                            await user_boards.getUsersBoards();
+                                            Navigator.of(context).pop();
+                                            setState(() {
+
+                                            });
                                           },
                                           icon: const Icon(Icons.check))
                                     ],

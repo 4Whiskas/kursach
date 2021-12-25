@@ -82,7 +82,7 @@ class _TrelloCardState extends State<TrelloCard> {
           child: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             height: 100,
-            width: 200,
+            width: 220,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

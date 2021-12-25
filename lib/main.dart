@@ -62,6 +62,7 @@ class _AppState extends State<App> {
             );
           } else {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               initialRoute: snapshot.data.toString(),
               routes: {
                 "login": (context) => const LoginPage(),
