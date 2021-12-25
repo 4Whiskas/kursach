@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -6,6 +8,9 @@ import 'package:kursach/data/temp_storage/app_data.dart' as app_data;
 import 'package:kursach/ui/widgets/flex/adding_card_form.dart';
 import 'package:kursach/ui/widgets/flex/trello_card.dart';
 import 'package:kursach/ui/widgets/static/bottom_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -137,7 +142,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 290,
                       height: 60,
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            var sh = await SharedPreferences.getInstance();
+                            sh.clear();
+                            Navigator.pushAndRemoveUntil(context,
+                                MaterialPageRoute(builder: (context) => const LoginPage()),
+                                    (route) => false);
+                          },
                           child: const Text(
                             "Logout",
                             style: TextStyle(

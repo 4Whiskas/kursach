@@ -114,17 +114,25 @@ class _ChatPageState extends State<ChatPage> {
           onTap: () {
             showModalBottomSheet(
                 context: context,
+                backgroundColor: lightPageMainColor,
                 builder: (context) {
                   return SingleChildScrollView(
                     child: SizedBox(
                       height: 350,
                       child: ListView.builder(
+                        padding: const EdgeInsets.all(40),
                         itemBuilder: (context, index) {
-                          return Text(app_data.chats
-                              .firstWhere(
-                                  (element) => element.chatId == widget.chatId)
-                              .users[index]
-                              .nickName);
+                          return Center(
+                            child: Text(
+                              app_data.chats
+                                  .firstWhere((element) =>
+                                      element.chatId == widget.chatId)
+                                  .users[index]
+                                  .nickName,
+                              style: const TextStyle(
+                                  fontFamily: "Sansita", fontSize: 24),
+                            ),
+                          );
                         },
                         itemCount: app_data.chats
                             .firstWhere(

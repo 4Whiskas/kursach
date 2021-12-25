@@ -23,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
         home: MaterialApp(
           builder: (context, child) => Scaffold(
             body: SafeArea(
@@ -82,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                                     backgroundColor: const Color(0xffDDD6EA),
                                     actionsAlignment: MainAxisAlignment.center,
                                     title: const Text(
-                                      "If you forgot your password or login you need to call to your system administrator, because we can`t automatically reset them for safety of data",
+                                      "Если вы забыли логин или пароль от своей учетной записи, вам необходимо обратиться к администратору для восстановления этих данных",
                                       style: TextStyle(
                                           color: Color(0xff776A94),
                                           fontFamily: "Sansita"),

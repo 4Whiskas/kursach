@@ -51,7 +51,7 @@ class _BottomBarState extends State<BottomBar> {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
         BottomNavigationBarItem(icon: Icon(Icons.chat), label: ""),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
+        BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ""),
       ],
     );
   }
